@@ -31,7 +31,16 @@ async def on_message(message):
         if referenced_message.author == bot.user:
             # Check if the role already exists
             role = discord.utils.get(message.guild.roles, name=message.content)
+            
+            # Framework for setting privleage roles out of bounds
+            #if message.content == "xxxxx":
+            #    await message.channel.send(f"{message.author.mention} is trying to escalate privileges!")
+            #   return
 
+            if message.content == "admin":
+                await message.channel.send(f"{message.author.mention} is trying to escalate privileges!")
+                return
+                
             if any(role.name == message.content for role in message.author.roles):
                 # If user already has that role, remove
                 await message.author.remove_roles(role)
